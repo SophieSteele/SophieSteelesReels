@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Sophie Steele's Reels</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;600&display=swap');
+
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #fafafa;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header,
+        nav,
+        .container,
+        footer {
+            display: block;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 1.5rem;
+            color: black;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #005eff;
+            border-bottom: 2px solid #005eff;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .contact-box {
+            background: white;
+            padding: 30px;
+            margin: 20px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-box h2 {
+            color: #e53935;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .icon-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            margin: 0 10px;
+            background-color: #e53935;
+            border-radius: 50%;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .icon-link:hover {
+            background-color: #b71c1c;
+            transform: translateY(-3px);
+        }
+
+        .icon-link.instagram {
+            background-color: #005eff;
+        }
+
+        .icon-link.instagram:hover {
+            background-color: #0038c5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f5f5f7;
+            font-size: 0.9rem;
+        }
+    </style>
+    <!-- FontAwesome CSS Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Contact Sophie Steele</h1>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="container">
+        <div class="contact-box">
+            <h2>Get in Touch</h2>
+            <a href="mailto:sophiesteele96@yahoo.com" class="icon-link">
+                <i class="fas fa-envelope"></i>
+                <!-- Email icon -->
+            </a>
+            <a href="https://www.instagram.com/sophiesteeley/" target="_blank" class="icon-link instagram">
+                <i class="fab fa-instagram"></i>
+                <!-- Instagram icon -->
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Sophie Steele's Reels. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

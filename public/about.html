@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophie Steele's Reels</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;600&display=swap');
+
+        /* General Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;600&display=swap');
+
+        /* General Styles */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #fafafa;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Fullscreen preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1d1d1f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Film reel animation container */
+        .camera-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .reel-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .reel {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            border-radius: 50%;
+            border: 8px solid #333;
+            border-top-color: #e53935;
+            border-right-color: #f2f2f2;
+            border-bottom-color: #f2f2f2;
+            border-left-color: #e53935;
+            animation: spin 3s linear infinite;
+            margin: 0 10px;
+        }
+
+        .reel:before,
+        .reel:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            border: 6px solid #333;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .reel:before {
+            width: 40px;
+            height: 40px;
+            border: 6px solid #333;
+        }
+
+        /* Rectangle and triangle to simulate camera */
+        .camera-body {
+            width: 180px;
+            height: 80px;
+            background-color: #333;
+            position: relative;
+            border-radius: 10px 10px 0 0;
+            margin-top: 10px;
+        }
+
+        .camera-body::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -20px;
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 20px solid #333;
+            /* Adjusted to left for a left-pointing triangle */
+            transform: translateY(-50%) rotate(180deg);
+            /* Remove rotation to point left */
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Fade-in for main content */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+        }
+
+        header,
+        nav,
+        .container,
+        footer {
+            display: block;
+        }
+
+        /* Styling for header, nav, posts, etc. */
+        header {
+            text-align: center;
+            padding: 50px 0;
+            font-size: 1.5rem;
+            /* Adjusted font size */
+            color: black;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            /* Added transition for smooth effect */
+        }
+
+        nav a:hover {
+            color: #005eff;
+            /* Change color on hover */
+            border-bottom: 2px solid #005eff;
+            /* Underline effect on hover */
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .post {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Added transition for smooth hover effect */
+        }
+
+        .post:hover {
+            transform: translateY(-5px);
+            /* Slight lift effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            /* Enhanced shadow on hover */
+        }
+
+        .post h2 {
+            color: #000000;
+            font-size: 1.25rem;
+            /* Adjusted font size for titles */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f5f5f7;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>About Sophie Steele's Reels</h1>
+        <p></p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+<div class="container">
+    <div class="about-content">
+        <h2>Welcome to the Dark Side of Cinema</h2>
+        <p class="lead">I'm Sophie Steele, and horror has been my passion since I first dared to watch *Hocus Pocus* as a child. What started as a fascination with the eerie has grown into a lifelong love affair with the genre that challenges our deepest fears and thrills our darkest imaginations.</p>
+        <p>Whether it's the psychological terror of *The Shining*, the slasher brilliance of *Halloween*, or the modern horror renaissance brought on by films like *Hereditary*, I dive deep into every aspect of horror cinema. My reviews and analyses are for those who, like me, are captivated by the shadows that dance on the silver screen.</p>
+        <p>On this blog, you'll find honest reviews, in-depth breakdowns of horror classics and contemporary masterpieces, and my personal reflections on what makes these films unforgettable. I created Sophie Steele's Horror Reels as a place where horror fans can connect, discuss, and celebrate this unique genre.</p>
+        <p>If you're as passionate about horror as I am, or if you're just beginning to explore the genre, I invite you to join me on this dark and thrilling journey.</p>
+        <div class="button-container">
+            <a href="contact.html">Get in Touch</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Sophie Steele's Reels. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
