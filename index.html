@@ -251,6 +251,7 @@
         }
 
         /* Modal Styles */
+        /* Modal Styles */
         #modal {
             display: none;
             position: fixed;
@@ -270,7 +271,10 @@
             border-radius: 10px;
             max-width: 600px;
             width: 90%;
-            text-align: left;
+            max-height: 80vh;
+            /* Restrict the height to 80% of the viewport */
+            overflow-y: auto;
+            /* Enable scrolling inside the modal */
             position: relative;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
@@ -295,6 +299,7 @@
             cursor: pointer;
             color: #e53935;
         }
+
 
         .post h2 {
             color: #e53935;
