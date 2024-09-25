@@ -242,11 +242,58 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
         .post:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Modal Styles */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            text-align: left;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content h2 {
+            color: #e53935;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #e53935;
         }
 
         .post h2 {
@@ -302,6 +349,14 @@
         <!-- Main content -->
         <div class="container fade-in" id="posts-container">
             <!-- Posts will be dynamically inserted here -->
+        </div>
+
+        <div id="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="modal-title"></h2>
+                <p id="modal-content"></p>
+            </div>
         </div>
 
         <footer class="fade-in">
@@ -361,7 +416,7 @@
             // Load posts as before (optional)
             async function loadPosts() {
                 const container = document.getElementById('posts-container');
-                const fileNames = ['posts.json'];
+                const fileNames = ['posts.json']; // Adjust based on your actual file name/path
 
                 for (const fileName of fileNames) {
                     try {
@@ -372,14 +427,17 @@
                         const data = await response.json();
 
                         if (data && Array.isArray(data.posts)) {
-                            data.posts.reverse().forEach(post => {
+                            data.posts.reverse().forEach((post, index) => {
                                 const postElement = document.createElement('article');
                                 postElement.classList.add('post');
+                                const truncatedContent = post.content.length > 200 ? post.content.substring(0, 200) + '...' : post.content;
+
                                 postElement.innerHTML = `
-                                    <h2>${post.title}</h2>
-                                    <p><strong>Posted on:</strong> ${post.date} by Sophie Steele</p>
-                                    <p>${post.content}</p>
-                                `;
+                                <h2>${post.title}</h2>
+                                <p><strong>Posted on:</strong> ${post.date} by Sophie Steele</p>
+                                <p>${truncatedContent}</p>
+                            `;
+                                postElement.addEventListener('click', () => openModal(post)); // Attach click event
                                 container.appendChild(postElement);
                             });
                         } else {
@@ -390,6 +448,31 @@
                     }
                 }
             }
+
+            // Open Modal and show full post content
+            function openModal(post) {
+                const modal = document.getElementById('modal');
+                const modalTitle = document.getElementById('modal-title');
+                const modalContent = document.getElementById('modal-content');
+
+                modalTitle.textContent = post.title;
+                modalContent.textContent = post.content;
+
+                modal.style.display = 'flex'; // Show modal
+            }
+
+            // Close Modal
+            document.querySelector('.close-button').addEventListener('click', () => {
+                document.getElementById('modal').style.display = 'none';
+            });
+
+            // Close Modal when clicking outside the content
+            window.addEventListener('click', (e) => {
+                const modal = document.getElementById('modal');
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
 
             document.addEventListener('DOMContentLoaded', loadPosts);
         </script>
