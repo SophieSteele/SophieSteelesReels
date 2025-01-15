@@ -458,8 +458,6 @@
                 const modal = document.getElementById('modal');
                 const modalTitle = document.getElementById('modal-title');
                 const modalContent = document.getElementById('modal-content');
-                modalTitle.textContent = post.title;
-                modalContent.textContent = post.content;
                 if (post.image) {
                     const modalImage = document.createElement('img');
                     modalImage.src = post.image;
@@ -469,6 +467,8 @@
                     modalContent.appendChild(modalImage);
                 }
                 modal.style.display = 'flex';
+                modalTitle.textContent = post.title;
+                modalContent.textContent = post.content;
             }
 
             document.querySelector('.close-button').addEventListener('click', () => {
