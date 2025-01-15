@@ -369,39 +369,27 @@
         </footer>
 
         <script>
-            // Wait for the full page to load
             window.addEventListener('load', function () {
                 const preloader = document.getElementById('preloader');
                 const fadeElements = document.querySelectorAll('.fade-in');
-
-                // Check if the preloader has already been shown in this session
                 if (!sessionStorage.getItem('preloaderShown')) {
-                    // If not shown, display the preloader and set the flag
                     setTimeout(() => {
-                        preloader.style.opacity = '0'; // Start fading out the preloader
+                        preloader.style.opacity = '0';
                         fadeElements.forEach(el => {
-                            el.classList.add('visible'); // Fade in the main content
+                            el.classList.add('visible');
                         });
-
-                        // Remove preloader from view after fade-out
                         setTimeout(() => {
                             preloader.style.display = 'none';
-                        }, 500); // 500ms fade-out duration
-
-                    }, 3000); // Keep the preloader for 3 seconds (to match the reel's spin time)
-
-                    // Set the flag so that the preloader is not shown again in this session
+                        }, 500);
+                    }, 3000);
                     sessionStorage.setItem('preloaderShown', 'true');
                 } else {
-                    // If preloader has been shown, immediately show the main content
                     preloader.style.display = 'none';
                     fadeElements.forEach(el => {
-                        el.classList.add('visible'); // Fade in the main content
+                        el.classList.add('visible');
                     });
                 }
             });
-
-            // Search Functionality
             document.getElementById('search-input').addEventListener('input', function () {
                 const query = this.value.toLowerCase();
                 const posts = document.querySelectorAll('.post');
@@ -417,11 +405,9 @@
                     }
                 });
             });
-
-            // Load posts as before (optional)
             async function loadPosts() {
                 const container = document.getElementById('posts-container');
-                const fileNames = ['posts.json']; // Adjust based on your actual file name/path
+                const fileNames = ['posts.json'];
 
                 for (const fileName of fileNames) {
                     try {
@@ -432,17 +418,23 @@
                         const data = await response.json();
 
                         if (data && Array.isArray(data.posts)) {
-                            data.posts.reverse().forEach((post, index) => {
+                            data.posts.reverse().forEach((post) => {
                                 const postElement = document.createElement('article');
                                 postElement.classList.add('post');
+
                                 const truncatedContent = post.content.length > 200 ? post.content.substring(0, 500) + '...' : post.content;
+                                let postImage = '';
+                                if (post.image) {
+                                    postImage = `<img src="${post.image}" alt="${post.title}" style="width:100%; max-height: 200px; object-fit: cover; margin-bottom: 10px;">`;
+                                }
 
                                 postElement.innerHTML = `
-                                <h2>${post.title}</h2>
-                                <p><strong>Posted on:</strong> ${post.date} by Sophie Steele</p>
-                                <p>${truncatedContent}</p>
-                            `;
-                                postElement.addEventListener('click', () => openModal(post)); // Attach click event
+                        ${postImage}
+                        <h2>${post.title}</h2>
+                        <p><strong>Posted on:</strong> ${post.date} by Sophie Steele</p>
+                        <p>${truncatedContent}</p>
+                    `;
+                                postElement.addEventListener('click', () => openModal(post));
                                 container.appendChild(postElement);
                             });
                         } else {
@@ -454,34 +446,34 @@
                 }
             }
 
-            // Open Modal and show full post content
             function openModal(post) {
                 const modal = document.getElementById('modal');
                 const modalTitle = document.getElementById('modal-title');
                 const modalContent = document.getElementById('modal-content');
-
                 modalTitle.textContent = post.title;
                 modalContent.textContent = post.content;
-
-                modal.style.display = 'flex'; // Show modal
+                if (post.image) {
+                    const modalImage = document.createElement('img');
+                    modalImage.src = post.image;
+                    modalImage.alt = post.title;
+                    modalImage.style.maxWidth = '100%';
+                    modalImage.style.marginTop = '20px';
+                    modalContent.appendChild(modalImage);
+                }
+                modal.style.display = 'flex';
             }
 
-            // Close Modal
             document.querySelector('.close-button').addEventListener('click', () => {
                 document.getElementById('modal').style.display = 'none';
             });
-
-            // Close Modal when clicking outside the content
             window.addEventListener('click', (e) => {
                 const modal = document.getElementById('modal');
                 if (e.target === modal) {
                     modal.style.display = 'none';
                 }
             });
-
             document.addEventListener('DOMContentLoaded', loadPosts);
         </script>
     </body>
-
 
 </html>
