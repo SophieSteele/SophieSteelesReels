@@ -416,24 +416,22 @@
                             throw new Error(`HTTP error! Status: ${response.status}`);
                         }
                         const data = await response.json();
-
                         if (data && Array.isArray(data.posts)) {
                             data.posts.reverse().forEach((post) => {
                                 const postElement = document.createElement('article');
                                 postElement.classList.add('post');
-
-                                const truncatedContent = post.content.length > 200 ? post.content.substring(0, 500) + '...' : post.content;
                                 let postImage = '';
                                 if (post.image) {
+                                    console.log(post.image);
                                     postImage = `<img src="${post.image}" alt="${post.title}" style="width:100%; max-height: 200px; object-fit: cover; margin-bottom: 10px;">`;
                                 }
-
                                 postElement.innerHTML = `
                         ${postImage}
                         <h2>${post.title}</h2>
                         <p><strong>Posted on:</strong> ${post.date} by Sophie Steele</p>
-                        <p>${truncatedContent}</p>
+                        <p>${post.content}</p>
                     `;
+
                                 postElement.addEventListener('click', () => openModal(post));
                                 container.appendChild(postElement);
                             });
@@ -445,6 +443,7 @@
                     }
                 }
             }
+
 
             function openModal(post) {
                 const modal = document.getElementById('modal');
