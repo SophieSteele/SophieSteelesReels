@@ -1,66 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sophie Steele's Reels</title>
-  <!-- Link to any external CSS (e.g., style.css) if needed -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophie Steele's Reels</title>
+    <!-- Link to any external CSS (e.g., style.css) if needed -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="camera-container">
-      <div class="reel-container">
-        <div class="reel"></div>
-        <div class="reel"></div>
-      </div>
-      <div class="camera-body"></div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="camera-container">
+            <div class="reel-container">
+                <div class="reel"></div>
+                <div class="reel"></div>
+            </div>
+            <div class="camera-body"></div>
+        </div>
     </div>
-  </div>
 
-  <!-- Reel Animation -->
-  <div id="reel-animation" class="reel-animation">
-    <div class="reel"></div>
-  </div>
-
-  <!-- Header with Logo -->
-  <header class="fade-in">
-    <img src="Designer.png" alt="Logo" class="logo">
-  </header>
-
-  <!-- Navigation Menu -->
-  <nav class="fade-in">
-    <a href="index.html" data-direction="left">Home</a>
-    <a href="public/about.html" data-direction="right">About</a>
-    <a href="public/contact.html" data-direction="left">Contact</a>
-  </nav>
-
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" id="search-input" placeholder="Search posts...">
-  </div>
-
-  <!-- Main content -->
-  <div class="container fade-in" id="posts-container">
-    <!-- Posts will be dynamically inserted here -->
-  </div>
-
-  <!-- Modal -->
-  <div id="modal">
-    <div class="modal-content">
-      <span class="close-button">&times;</span>
-      <h2 id="modal-title"></h2>
-      <p id="modal-content"></p>
+    <!-- Reel Animation -->
+    <div id="reel-animation" class="reel-animation">
+        <div class="reel"></div>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer class="fade-in">
-    <p>&copy; 2024 Sophie Steele's Reels. All rights reserved.</p>
-  </footer>
+    <!-- Header with Logo -->
+    <header class="fade-in">
+        <img src="Designer.png" alt="Logo" class="logo">
+    </header>
 
-  <!-- Reference the external JavaScript file -->
-  <script src="script.js"></script>
+    <!-- Navigation Menu -->
+    <nav class="fade-in">
+        <a href="index.html" data-direction="left">Home</a>
+        <a href="public/about.html" data-direction="right">About</a>
+        <a href="public/contact.html" data-direction="left">Contact</a>
+    </nav>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search posts...">
+    </div>
+    
+    <div class="carousel-container">
+        <div class="carousel"></div>
+        <button class="carousel-prev">&#10094;</button>
+        <button class="carousel-next">&#10095;</button>
+    </div>
+
+
+    <!-- Main content -->
+    <div class="container fade-in" id="posts-container">
+        <!-- Posts will be dynamically inserted here -->
+    </div>
+
+    <!-- Modal -->
+    <div id="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p id="modal-content"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="fade-in">
+        <p>&copy; 2024 Sophie Steele's Reels. All rights reserved.</p>
+    </footer>
+
+    <!-- Reference the external JavaScript file -->
+    <script src="script.js"></script>
 </body>
+
 </html>
