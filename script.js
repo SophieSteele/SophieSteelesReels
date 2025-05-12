@@ -38,35 +38,55 @@ document.getElementById('search-input').addEventListener('input', function () {
   });
 });
 
-// Carousel navigation functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const carousel = document.querySelector('.carousel');
-    const prevBtn = document.querySelector('.carousel-prev');
-    const nextBtn = document.querySelector('.carousel-next');
+// Load Posts from JSON
+async function loadPosts() {
+  const container = document.getElementById('posts-container');
+  const fileNames = ['posts.json'];
 
-    let index = 0;
-    const totalItems = document.querySelectorAll('.carousel-item').length;
+  for (const fileName of fileNames) {
+    try {
+      const response = await fetch(`data/${fileName}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
 
-    function updateCarousel() {
-        carousel.style.transform = `translateX(-${index * 100}%)`;
+      if (data && Array.isArray(data.posts)) {
+        data.posts.reverse().forEach((post) => {
+          const postElement = document.createElement('article');
+          postElement.classList.add('post');
+
+          // Truncate the content if it's too long
+          const truncatedContent = post.content.length > 200
+            ? post.content.substring(0, 200) + '...'
+            : post.content;
+
+          // Add the image if it exists
+          let postImage = '';
+          if (post.image) {
+            console.log("loaded Image");
+            postImage = `<img src="${post.image}" alt="${post.title}" style="max-width: 100%; height: auto; margin-bottom: 10px;">`;
+          }
+          // Combine the image, title, date and content into the post HTML
+          postElement.innerHTML = `
+            ${postImage}
+            <h2>${post.title}</h2>
+            <p><strong>Posted on:</strong> ${post.date} by Sophie Steele</p>
+            <p>${truncatedContent}</p>
+          `;
+
+          // Open modal when clicking on a post
+          postElement.addEventListener('click', () => openModal(post));
+          container.appendChild(postElement);
+        });
+      } else {
+        console.error(`Expected an object with a posts array but got ${typeof data}`);
+      }
+    } catch (error) {
+      console.error(`Failed to load ${fileName}:`, error);
     }
-
-    prevBtn.addEventListener('click', () => {
-        index = index > 0 ? index - 1 : totalItems - 1;
-        updateCarousel();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        index = index < totalItems - 1 ? index + 1 : 0;
-        updateCarousel();
-    });
-
-    // Auto-slide every 5 seconds
-    setInterval(() => {
-        index = index < totalItems - 1 ? index + 1 : 0;
-        updateCarousel();
-    }, 5000);
-});
+  }
+}
 
 // Open Modal Functionality
 function openModal(post) {
@@ -93,37 +113,6 @@ function openModal(post) {
   modalTitle.textContent = post.title;
   modalContent.innerHTML += post.content;
 }
-
-// Carousel functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const carousel = document.querySelector('.carousel');
-    const prevBtn = document.querySelector('.carousel-prev');
-    const nextBtn = document.querySelector('.carousel-next');
-
-    let index = 0;
-    const totalItems = document.querySelectorAll('.carousel-item').length;
-
-    function updateCarousel() {
-        carousel.style.transform = `translateX(-${index * 100}%)`;
-    }
-
-    prevBtn.addEventListener('click', () => {
-        index = index > 0 ? index - 1 : totalItems - 1;
-        updateCarousel();
-    });
-
-    nextBtn.addEventListener('click', () => {
-        index = index < totalItems - 1 ? index + 1 : 0;
-        updateCarousel();
-    });
-
-    // Auto-slide every 5 seconds
-    setInterval(() => {
-        index = index < totalItems - 1 ? index + 1 : 0;
-        updateCarousel();
-    }, 5000);
-});
-
 
 // Close Modal when clicking on the close button or outside the modal
 document.querySelector('.close-button').addEventListener('click', () => {
