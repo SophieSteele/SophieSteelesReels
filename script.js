@@ -88,6 +88,88 @@ async function loadPosts() {
   }
 }
 
+let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function showSlides(n) {
+    let slides = document.querySelectorAll(".mySlides");
+    if (n > slides.length) slideIndex = 1;
+    if (n < 1) slideIndex = slides.length;
+
+    slides.forEach((slide, i) => {
+        slide.style.display = i === slideIndex - 1 ? "block" : "none";
+    });
+}
+
+
+async function generateSlideshow() {
+    const container = document.getElementById('slideshow-container');
+    
+    if (!container) {
+        console.error("Error: #slideshow-container not found!");
+        return;
+    }
+
+    try {
+        const response = await fetch('data/posts.json');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const data = await response.json();
+
+        if (data && Array.isArray(data.posts)) {
+            const firstThreePosts = data.posts.reverse().slice(0, 3); // Get the first 3 posts
+            firstThreePosts.forEach((post, index) => {
+                console.log(`Creating slide ${index + 1}: ${post.title}`);
+
+                // Create slide div
+                const slideDiv = document.createElement('div');
+                slideDiv.classList.add('mySlides', 'fade');
+
+                // Image inclusion check
+                let postImage = post.image 
+                    ? `<img src="${post.image}" alt="${post.title}" style="width:100%">`
+                    : '<img src="images/placeholder.jpg" style="width:100%">'; // Fallback image
+
+                // Assign slide structure
+                slideDiv.innerHTML = `
+                    <div class="numbertext">${index + 1} / 3</div>
+                    ${postImage}
+                    <div class="text">${post.title}</div>
+                `;
+
+                container.appendChild(slideDiv);
+            });
+
+            // Add navigation buttons
+            container.innerHTML += `
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            `;
+
+        } else {
+            console.error("Error: Posts array missing or incorrectly formatted!");
+        }
+    } catch (error) {
+        console.error("Failed to fetch posts:", error);
+    }
+}
+
+function autoScroll(){
+  plusSlides(1)
+}
+
+setInterval(autoScroll, 4000)
+
+
+
+// Load slideshow when DOM is ready
+document.addEventListener('DOMContentLoaded', generateSlideshow);
+
+
 // Open Modal Functionality
 function openModal(post) {
   const modal = document.getElementById('modal');
